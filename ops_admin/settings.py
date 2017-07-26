@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ops_cmdb',
+    'ops_account',
 ]
 
 MIDDLEWARE = [
@@ -76,9 +77,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ops_admin',
         'USER': 'root',
-        'PASSWORD': '111111',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
-        'PORT': '3320'
+        'PORT': '3306'
     }
 }
 
@@ -120,7 +121,21 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# STATICFILES_DIR = [
-#     # os.path.join(BASE_DIR, 'static'),
-#     '/home/workspace/ops_cmdb/static',
-# ]
+STATICFILES_DIRS = (
+    ("bower_components", os.path.join(STATIC_ROOT, 'bower_components')),
+    ("dist", os.path.join(STATIC_ROOT, 'dist')),
+    ("fonts", os.path.join(STATIC_ROOT, 'fonts')),
+    ("js", os.path.join(STATIC_ROOT, 'js')),
+    ("css", os.path.join(STATIC_ROOT, 'css')),
+    ("images", os.path.join(STATIC_ROOT, 'images')),
+    ("plugins", os.path.join(STATIC_ROOT, 'plugins')),
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'yangqinglin_0723@163.com'
+EMAIL_HOST_PASSWORD = 'yql0723'
+DEFAULT_FROM_EMAIL = 'yangqinglin_0723@163.com'

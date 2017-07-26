@@ -16,9 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^cmdb/$', include('ops_cmdb.urls')),
+    url(r'^cmdb/', include('ops_cmdb.urls')),
+    url(r'^account/', include('ops_account.urls')),
 ]
