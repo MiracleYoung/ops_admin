@@ -13,4 +13,6 @@ app_name = 'ops_cmdb'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^create_server/$', views.create_server, name='create_server'),
+    url(r'^get_idc/$', views.get_idc, name='get_idc'),
 ]

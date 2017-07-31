@@ -35,8 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ops_admin',
     'ops_cmdb',
     'ops_account',
+
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,5 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'yangqinglin_0723@163.com'
 EMAIL_HOST_PASSWORD = 'yql0723'
 DEFAULT_FROM_EMAIL = 'yangqinglin_0723@163.com'
+
+LOGIN_URL = 'ops_account:login'

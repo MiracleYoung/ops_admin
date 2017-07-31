@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="{% static 'bower_components/Ionicons/css/ionicons.min.css' %}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{% static 'plugins/iCheck/square/blue.css' %}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,24 +31,14 @@
 </head>
 <body class="hold-transition login-page">
 
-    {% block form %}{% endblock form %}
+{% block form %}{% endblock form %}
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
 <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-<!-- iCheck -->
-<script src="{% static 'plugins/iCheck/icheck.min.js' %}"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
+
 
 {% block js %}{% endblock js %}
 </body>

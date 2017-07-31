@@ -1,0 +1,247 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/ops_cmdb/ops_cmdb.css' %}"/>
+{% endblock css %}
+
+{% block js %}
+    <script src="{% static 'bower_components/select2/dist/js/select2.full.min.js' %}"></script>
+    <script src="{% static 'plugins/input-mask/jquery.inputmask.js' %}"></script>
+    <script src="{% static 'plugins/input-mask/jquery.inputmask.date.extensions.js' %}"></script>
+    <script src="{% static 'plugins/input-mask/jquery.inputmask.extensions.js' %}"></script>
+    <script src="{% static 'js/ops_cmdb/ops_cmdb.js' %}"></script>
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //IP Mask
+            $('[data-mask]').inputmask()
+
+            // submit form
+            $('#server-submit').click(function () {
+                submitServerForm()
+            })
+
+            $.ajax({
+                url: ''
+            })
+
+
+        })
+    </script>
+
+{% endblock js %}
+
+{% block main %}
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Server Info</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+
+        <div class="box-body">
+
+            <div class="row">
+                <!-- IP mask -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-ip">IP mask:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-laptop"></i>
+                        </div>
+                        <input type="text" class="form-control" data-inputmask="'alias': 'ip'" data-mask
+                               id="server-ip" name="server-ip"/>
+                    </div>
+                </div>
+
+                <!-- Hostname -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-hostname">Hostname:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-home"></i>
+                        </div>
+                        <input type="email" class="form-control" id="server-hostname" placeholder="主机名"
+                               name="server-hostname"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- project -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="project">Project:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-folder-o"></i>
+                        </div>
+                        <input type="text" class="form-control" id="server-project" placeholder="项目名"
+                               name="server-project"/>
+                    </div>
+                </div>
+
+                <!-- description -->
+
+                <!-- idc -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-idc">IDC:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-building-o"></i>
+                        </div>
+                        <select class="form-control select2" style="width: 100%;" name="server-idc" id="server-idc">
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- cabinet -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-cabinet">Cabinet:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-server"></i>
+                        </div>
+                        <input type="text" class="form-control" id="server-cabinet" placeholder="机柜名"
+                               name="server-cabinet"/>
+                    </div>
+                </div>
+
+                <!-- cabinet unit -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-cabinet-unit">Cabinet Unit:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-square-o"></i>
+                        </div>
+                        <input type="text" class="form-control" id="server-cabinet-unit" placeholder="机柜u数"
+                               name="server-cabinet-unit"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- switch1 name -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-switch1">Switch1:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-random"></i>
+                        </div>
+                        <input type="text" class="form-control" id="server-switch1" placeholder="第一交换机名"
+                               name="server-switch1"/>
+                    </div>
+                </div>
+
+                <!-- switch1 port -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-switch1-port">Switch1 Port:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-random"></i>
+                        </div>
+                        <input type="text" class="form-control" id="server-switch1-port" placeholder="第一交换机端口"
+                               name="server-switch1-port"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- switch2 name -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-switch2">Switch2:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-random"></i>
+                        </div>
+                        <input type="text" class="form-control" id="server-switch2" placeholder="第二交换机名"
+                               name="server-switch2"/>
+                    </div>
+                </div>
+
+                <!-- switch2 port -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-switch2-port">Switch2 Port:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-random"></i>
+                        </div>
+                        <input type="text" class="form-control" id="server-switch2-port" placeholder="第二交换机端口"
+                               name="server-switch2-port"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- mgr name -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-mgr">MGR:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-cog"></i>
+                        </div>
+                        <input type="text" class="form-control" id="server-mgr" placeholder="远程管理交换机"
+                               name="server-mgr"/>
+                    </div>
+                </div>
+
+                <!-- mgr port -->
+                <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                    <label for="server-mgr-port">MGR Port:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-cog"></i>
+                        </div>
+                        <input type="text" class="form-control" id="server-mgr-port" placeholder="远程管理交换机端口"
+                               name="server-mgr-port"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /.form-group -->
+
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#server-modal"
+                    id="server-submit">
+                Submit Server Form
+            </button>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="server-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    {#                    <div class="modal-header  alert alert-warning alert-dismissible">#}
+                    {#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span#}
+                    {#                                aria-hidden="true">&times;</span></button>#}
+                    {#                        <h4 class="modal-title" id="server-modal-title">Warning!</h4>#}
+                    {#                    </div>#}
+
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-warning"></i> Alert!</h4> Please verify your form!
+                    </div>
+
+                    <div class="modal-body" id="server-modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock main %}

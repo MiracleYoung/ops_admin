@@ -7,9 +7,8 @@
 
 from lib.utils import Mail
 
-if __name__ == '__main__':
 
-
+def test_mail():
     message = '''Hi, {}, your new password is '{}'. '''.format('miracle', '111111')
     subject = 'Ops Admin Reset Password Email'
     recipient_list = ['me@miracle.com', ]
@@ -17,3 +16,7 @@ if __name__ == '__main__':
         Mail.send_mail(subject=subject, message=message, recipient_list=recipient_list)
     except Exception as e:
         print(e)
+
+
+if __name__ == '__main__':
+    pass
