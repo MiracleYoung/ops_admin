@@ -2,6 +2,11 @@
  * Created by miracleYoung on 2017/7/27.
  */
 
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
 
 // validate server create
 function validateIp() {
@@ -101,7 +106,13 @@ function submitServerForm() {
         return false
     }
     $.ajax({
-        url: '/cmdb/server_create',
+        beforeSend: function(xhr, settings){
+            var csrftoken = Cookies.get('csrftoken')
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        },
+        url: '/cmdb/create_server/',
         dataType: 'json',
         method: 'POST',
         data: {
@@ -120,11 +131,24 @@ function submitServerForm() {
         }
     }).done(function (data) {
         $('#server-modal-body').append("<p>Create server success. Your server is:</p>")
-        $('#server-modal-body').append("<p>" + data + "</p>")
-    }).fail(function(err){
-        $('#server-modal-body').append("<p>" + err + "</p>")
+        $('#server-modal-body').append("<p>" + data.ip + "</p>")
+    }).fail(function (err) {
+        $('#server-modal-body').append("<p>" + err.message + "</p>")
     })
 
+}
+
+function getIdc() {
+    $.ajax({
+        url: '/cmdb/get_idc/',
+        method: 'GET',
+    }).done(function (data) {
+        idc = JSON.parse(data)
+        for (var i = 0; i < idc.length; i++) {
+            $('#server-idc').append("<option>" + idc[i] + "</option>")
+        }
+
+    })
 }
 
 

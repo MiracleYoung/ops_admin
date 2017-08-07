@@ -25,9 +25,7 @@
                 submitServerForm()
             })
 
-            $.ajax({
-                url: ''
-            })
+            getIdc()
 
 
         })
@@ -65,7 +63,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-home"></i>
                         </div>
-                        <input type="email" class="form-control" id="server-hostname" placeholder="主机名"
+                        <input type="text" class="form-control" id="server-hostname" placeholder="主机名"
                                name="server-hostname"/>
                     </div>
                 </div>
@@ -74,13 +72,18 @@
             <div class="row">
                 <!-- project -->
                 <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                    <label for="project">Project:</label>
+                    <label for="server-type">Type:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-folder-o"></i>
                         </div>
-                        <input type="text" class="form-control" id="server-project" placeholder="项目名"
-                               name="server-project"/>
+                        <select class="form-control select2" style="width: 100%;" name="server-type" id="server-type">
+                            <option selected="selected" value="1">DB</option>
+                            <option value="2">SYS</option>
+                            <option value="3">LAB</option>
+                            <option value="4">DEV</option>
+                            <option value="5">Others</option>
+                        </select>
                     </div>
                 </div>
 

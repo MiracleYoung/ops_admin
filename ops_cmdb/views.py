@@ -28,25 +28,26 @@ def create_server(request):
         return render(request, 'ops_cmdb/cmdb_create_server.html')
     if request.method == 'POST':
         server_form = {
-            'hostname': request.POST.get('hostname', ''),
-            'ip': request.POST.get('ip', ''),
-            'project': request.POST.get('project', ''),
-            'description': request.POST.get('description', ''),
-            'cmdb_idc_id': request.POST.get('cmdb_idc_id', ''),
-            'cmdb_cabinet_id': request.POST.get('cmdb_cabinet_id', ''),
-            'cabinet_unit': request.POST.get('cabinet_unit', ''),
-            'switch1_id': request.POST.get('switch1_id', ''),
-            'switch1_port': request.POST.get('switch1_port', ''),
-            'switch2_id': request.POST.get('switch2_id', ''),
-            'switch2_port': request.POST.get('switch2_port', ''),
-            'mgr_id': request.POST.get('mgr_id', ''),
-            'mgr_port': request.POST.get('mgr_port', ''),
+            'hostname': request.POST.get('server-hostname', ''),
+            'ip': request.POST.get('server-ip', ''),
+            'type': int(request.POST.get('server-type', 0)),
+            'description': request.POST.get('server-description', ''),
+            'cmdb_idc_id': int(request.POST.get('server-cmdb-idc-id', 0)),
+            'cmdb_cabinet_id': int(request.POST.get('server-cmdb-cabinet-id', 0)),
+            'cabinet_unit': int(request.POST.get('server-cabinet-unit', 0)),
+            'switch1_id': int(request.POST.get('server-switch1-id', 0)),
+            'switch1_port': int(request.POST.get('server-switch1-port', 0)),
+            'switch2_id': int(request.POST.get('server-switch2-id', 0)),
+            'switch2_port': int(request.POST.get('server-switch2-port', 0)),
+            'mgr_id': int(request.POST.get('server-mgr-id', 0)),
+            'mgr_port': int(request.POST.get('server-mgr-port', 0)),
         }
         response_data = {}
         try:
-            cmdb_server = CmdbServer(server_form)
+            cmdb_server = CmdbServer(**server_form)
             cmdb_server.save()
             response_data['message'] = 'server created success.'
+            response_data['ip'] = cmdb_server.ip
             return HttpResponse(json.dumps(response_data))
         except DatabaseError as e:
             response_data['message'] = 'server created failed by {}'.format(e)
@@ -55,5 +56,6 @@ def create_server(request):
 
 def get_idc(request):
     if request.method == 'GET':
-        idc = CmdbIdc().objects.all().only('name')
-        return HttpResponse(json.dumps({'idc': idc}))
+        idc = CmdbIdc.objects.all().values('name')
+        response_data = [item['name'] for item in idc]
+        return HttpResponse(json.dumps(response_data))

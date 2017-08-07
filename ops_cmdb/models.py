@@ -32,6 +32,7 @@ class CmdbServer(Model):
     class Meta:
         db_table = 'cmdb_server'
 
+
 class CmdbIdc(Model):
     id = IntegerField(primary_key=True, auto_created=True)
     name = CharField(max_length=255, null=False, default='')
